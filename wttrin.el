@@ -3,6 +3,7 @@
 
 ;; Author: Carl X. Su <bcbcarl@gmail.com>
 ;;         ono hiroko (kuanyui) <azazabc123@gmail.com>
+;; Maintainer: Lucien Cartier-Tilet <lucien@phundrak.com>
 ;; Version: 0.2.0
 ;; Package-Requires: ((emacs "24.4") (xterm-color "1.0"))
 ;; Keywords: comm, weather, wttrin
