@@ -29,6 +29,36 @@ or ~g~ to query the weather for another city.
 #+caption: Example of wttrin.el
 [[file:wttrin.png]]
 
+* Installation
+** Local installation
+If you want to install this package the old-fashioned way, clone this
+repository in Emacs’ ~load-path~ and add the following to your ~.emacs~ or
+~init.el~:
+#+begin_src emacs-lisp
+  (require 'wttrin)
+#+end_src
+
+** Straight + use-package
+My personnal choice in terms of installing packages, add the following
+to your ~.emacs~ or ~init.el~:
+#+begin_src emacs-lisp
+  (use-package wttrin
+    :defer t
+    :ensure t
+    :straight (wttrin :type git
+                      :host github
+                      :repo "Phundrak/emacs-wttrin")
+    :config
+    (setq wttrin-default-cities '("Paris" "Lyon")
+          wttrin-use-metric t))
+#+end_src
+
+** Other methods
+I am aware other methods are available for installing packages in
+Emacs, such as ~quelpa~ or Spacemacs’ and DoomEmacs’ package managers,
+however I am yet unsure how to install this package with them. If you
+do, feel free to submit a PR with new instructions!
+
 * License
 This package is under the MIT license of which you can find a copy in
 this repository.
