@@ -4,7 +4,7 @@
 ;; Author: Carl X. Su <bcbcarl@gmail.com>
 ;;         ono hiroko (kuanyui) <azazabc123@gmail.com>
 ;; Maintainer: Lucien Cartier-Tilet <lucien@phundrak.com>
-;; Version: 0.3.0
+;; Version: 0.4.0
 ;; Package-Requires: ((emacs "24.4") (xterm-color "1.0"))
 ;; Keywords: comm, weather, wttrin
 ;; URL: https://github.com/bcbcarl/emacs-wttrin
@@ -33,15 +33,21 @@
   :group 'wttrin
   :type 'string)
 
+(defcustom wttrin-use-metric t
+  "When t, use metric units, otherwise use US imperial units."
+  :group 'wttrin
+  :type 'boolean)
+
 (defun wttrin-fetch-raw-string (query)
   "Get the weather information based on your `QUERY'."
   (let ((url-user-agent "curl"))
     (add-to-list 'url-request-extra-headers `("Accept-Language" . ,wttrin-language))
     (with-current-buffer
         (url-retrieve-synchronously
-         (format "http%s://wttr.in/%s?A"
+         (format "http%s://wttr.in/%s?A%s"
                  (if (gnutls-available-p) "s" "")
-                 query)
+                 query
+                 (if wttrin-use-metric "m" "u"))
          (lambda (status)
            (switch-to-buffer (current-buffer))))
       (decode-coding-string (buffer-string)

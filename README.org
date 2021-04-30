@@ -15,6 +15,13 @@ You can also specify the language you wish to use:
   (setq wttrin-language "fr-FR")
 #+end_src
 
+The debate over whether the metric or the imperial units are better is
+long and ultimately depends on which you grew up with (spoiler, metric
+is better and is used by default). Well, there is a setting for that:
+#+begin_src emacs-lisp
+  (setq wttrin-use-metric nil) ; For fellow US Emacs users
+#+end_src
+
 You can now run ~M-x wttrin~ to get the upcoming weather for your
 city. When the weather is displayed you can press ~q~ to quit the buffer
 or ~g~ to query the weather for another city.
