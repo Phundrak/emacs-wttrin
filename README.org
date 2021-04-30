@@ -1,0 +1,31 @@
+#+title: wttrin.el
+#+author: Lucien Cartier-Tilet
+#+email: lucien@phundrak.com
+Emacs frontend for weather web services[fn:1].
+
+* Usage
+Set your default cities list for completion:
+#+begin_src emacs-lisp
+  (setq wttrin-default-cities '("Paris" "New York" "Rio de Janeiro"
+                                "Nairobi" "Tokyo" "Delhi" "Canberra"))
+#+end_src
+
+You can also specify the language you wish to use:
+#+begin_src emacs-lisp
+  (setq wttrin-language "fr-FR")
+#+end_src
+
+You can now run ~M-x wttrin~ to get the upcoming weather for your
+city. When the weather is displayed you can press ~q~ to quit the buffer
+or ~g~ to query the weather for another city.
+
+#+caption: Example of wttrin.el
+[[file:wttrin.png]]
+
+* License
+This package is under the MIT license of which you can find a copy in
+this repository.
+
+* Footnotes
+
+[fn:1] [[https://wttr.in][wttr.in]]

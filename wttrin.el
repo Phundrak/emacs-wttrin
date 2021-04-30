@@ -4,7 +4,7 @@
 ;; Author: Carl X. Su <bcbcarl@gmail.com>
 ;;         ono hiroko (kuanyui) <azazabc123@gmail.com>
 ;; Maintainer: Lucien Cartier-Tilet <lucien@phundrak.com>
-;; Version: 0.2.0
+;; Version: 0.3.0
 ;; Package-Requires: ((emacs "24.4") (xterm-color "1.0"))
 ;; Keywords: comm, weather, wttrin
 ;; URL: https://github.com/bcbcarl/emacs-wttrin
@@ -28,15 +28,15 @@
   :group 'wttrin
   :type 'list)
 
-(defcustom wttrin-default-accept-language '("Accept-Language" . "en-US,en;q=0.8,zh-CN;q=0.6,zh;q=0.4")
-  "Specify default HTTP request Header for Accept-Language."
+(defcustom wttrin-language "en-US"
+  "Requested language for wttrin."
   :group 'wttrin
-  :type '(list))
+  :type 'string)
 
 (defun wttrin-fetch-raw-string (query)
   "Get the weather information based on your `QUERY'."
   (let ((url-user-agent "curl"))
-    (add-to-list 'url-request-extra-headers wttrin-default-accept-language)
+    (add-to-list 'url-request-extra-headers `("Accept-Language" . ,wttrin-language))
     (with-current-buffer
         (url-retrieve-synchronously
          (format "http%s://wttr.in/%s?A"
