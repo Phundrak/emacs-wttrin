@@ -30,11 +30,10 @@
 (defcustom wttrin-default-accept-language '("Accept-Language" . "en-US,en;q=0.8,zh-CN;q=0.6,zh;q=0.4")
   "Specify default HTTP request Header for Accept-Language."
   :group 'wttrin
-  :type '(list)
-  )
+  :type '(list))
 
 (defun wttrin-fetch-raw-string (query)
-  "Get the weather information based on your QUERY."
+  "Get the weather information based on your `QUERY'."
   (let ((url-user-agent "curl"))
     (add-to-list 'url-request-extra-headers wttrin-default-accept-language)
     (with-current-buffer
@@ -48,11 +47,12 @@
                             'utf-8))))
 
 (defun wttrin-exit ()
+  "Quit wttrin."
   (interactive)
   (quit-window t))
 
 (defun wttrin-query (city-name)
-  "Query weather of CITY-NAME via wttrin, and display the result in new buffer."
+  "Query weather of `CITY-NAME' via wttrin, and display the result in new buffer."
   (let ((raw-string (wttrin-fetch-raw-string city-name)))
     (if (string-match "ERROR" raw-string)
         (message "Cannot get weather data. Maybe you inputed a wrong city name?")
@@ -71,7 +71,7 @@
 
 ;;;###autoload
 (defun wttrin (city)
-  "Display weather information for CITY."
+  "Display weather information for `CITY'."
   (interactive
    (list
     (completing-read "City name: " wttrin-default-cities nil nil
