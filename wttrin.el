@@ -35,13 +35,17 @@
 
 (defun wttrin-fetch-raw-string (query)
   "Get the weather information based on your QUERY."
-  (let ((url-request-extra-headers '(("User-Agent" . "curl"))))
+  (let ((url-user-agent "curl"))
     (add-to-list 'url-request-extra-headers wttrin-default-accept-language)
     (with-current-buffer
         (url-retrieve-synchronously
-         (concat "http://wttr.in/" query)
-         (lambda (status) (switch-to-buffer (current-buffer))))
-      (decode-coding-string (buffer-string) 'utf-8))))
+         (format "http%s://wttr.in/%s?A"
+                 (if (gnutls-available-p) "s" "")
+                 query)
+         (lambda (status)
+           (switch-to-buffer (current-buffer))))
+      (decode-coding-string (buffer-string)
+                            'utf-8))))
 
 (defun wttrin-exit ()
   (interactive)
